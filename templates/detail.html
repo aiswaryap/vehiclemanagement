@@ -1,0 +1,256 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.header-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.header-li {
+  float: left;
+}
+
+.header-li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.header-li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+<!--for cards-->
+.card {
+
+  margin-top: 2%;
+  grid-row-gap: 10px;
+  padding: 2%;
+  max-width: 700px;
+    width: 30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50% ;
+
+}
+.grid-container-out {
+  display: grid;
+  grid-template-columns: auto auto ;
+
+
+
+}
+.grid-item {
+margin: 2%;
+  text-align: center;
+}
+
+    .login-box{
+    margin-top: 2%;
+    grid-row-gap: 10px;
+    padding: 2%;
+    max-width: 700px;
+    width: 30%;
+    /* justify-content: center;
+    align-items: center; */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    /* top: 20%; */
+
+}
+.login-page{
+  /* padding: 10%; */
+  margin: auto;
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+.head{
+  text-align: center;
+}
+.form-row{
+  /* display: grid; */
+
+  width: 100%;
+  padding-bottom: 20px;
+  /* grid-template-rows: 1fr; */
+}
+
+.form-column{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.submit-button{
+  /* background-color: #76323F; */
+
+  background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: 2px solid #023B59;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+
+
+}
+
+button:hover {
+  opacity: 0.8;
+}
+.delete{
+background-color: #d11a2a;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: 2px solid #d11a2a;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.edit{
+background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  border: 2px solid #023B59;
+  margin: 20px 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.heading{
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+</style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+
+      <li><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}<li><a href="/add/">Register Vehicle</a></li>{% endif %}
+    </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+          <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% else %}
+          <li ><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li ><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+<!--<ul class="header-ul">-->
+<!--  <li class="header-li"><a class="active" href="/">Home</a></li>-->
+<!--  {% if user.is_authenticated %}-->
+<!--  <li class="header-li"><a href="/accounts/logout">Logout</a></li>-->
+<!--  {% if user.is_superuser %}<li class="header-li"><a href="/add/">Register Vehicle</a></li>{% endif %}-->
+<!--    {% else %}-->
+<!--  <li class="header-li"><a href="accounts/register">Register</a></li>-->
+<!--  <li class="header-li"><a href="accounts/login">Login</a></li>-->
+<!--  {% endif %}-->
+<!--</ul>-->
+{% if user.is_authenticated %}
+<div class="login-page">
+        <div class="login-box" >
+            <h3 class="heading" ><b>Vehicle Details</b></h3>
+
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Number: </b></div>
+                    <div class="form-input">{{vehicles.number}}</div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Type</b></div>
+                    <div class="form-input">{{vehicles.type}}</div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Model: </b></div>
+                    <div class="form-input">{{vehicles.model}}</div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Description: </b></div>
+                    <div class="form-input">{{vehicles.description}}</div>
+                </div>
+
+            {% if user.is_superuser %}
+            <div class="grid-container" >
+   <div class="grid-item">
+                <button class="edit"  onMouseOver="opacity: 0.8;" ><a href="/update/{{vehicles.id}}" >Edit</a></button>
+   </div>
+      <div class="grid-item">
+          <button class="delete" onMouseOver="opacity: 0.8;" ><a href="/delete/{{vehicles.id}}" >Delete</a></button>
+            </div>
+            </div>
+            {% elif user.is_staff %}
+            <button class="edit"  onMouseOver="opacity: 0.8;" ><a href="/update/{{vehicles.id}}" >Edit</a></button>
+            {% else %}
+            <div></div>
+            {% endif %}
+        </div>
+      </div>
+{% else %}
+<div>Please Login!!</div>
+{% endif %}
+</body>
+</html>
+
+
+
+
+<!--{{vehicles.number}}<br>-->
+<!--{{vehicles.type}}<br>-->
+<!--{{vehicles.model}}<br>-->
+<!--{{vehicles.description}}<br>-->
+<!--</div>-->
+<!--    <button ><a href="/delete/{{vehicles.id}}" >Delete</a></button>-->
+<!--  </div>-->

@@ -1,0 +1,182 @@
+<!--<form method="post" enctype="multipartform-data">-->
+<!--  {% csrf_token %}-->
+<!--  {{form.as_p}}-->
+<!--  <input type="submit" value="update">-->
+<!--</form>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Title</title>
+    <style>
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+.delete{
+background-color: yellow;
+  color: black;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: 2px solid yellow;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.edit{
+background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  border: 2px solid #023B59;
+  margin: 20px 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50% ;
+
+}
+.grid-item {
+margin: 2%;
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+
+      <li><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}<li><a href="/add/">Register Vehicle</a></li>{% endif %}
+    </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+          <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% else %}
+          <li ><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li ><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+<!--<ul>-->
+<!--  <li><a class="active" href="/">Home</a></li>-->
+<!--  {% if user.is_authenticated %}-->
+<!--&lt;!&ndash;    <h5>Hai {{user.username}}</h5>&ndash;&gt;-->
+<!--  <li><a href="/accounts/logout">Logout</a></li>-->
+<!--  {% if user.is_superuser %}<li class="header-li"><a href="/add/">Register Vehicle</a></li>{% endif %}-->
+<!--    {% else %}-->
+<!--  <li><a href="/accounts/register">Register</a></li>-->
+<!--  <li><a href="/accounts/login">Login</a></li>-->
+<!--  {% endif %}-->
+<!--</ul>-->
+{% if user.is_authenticated %}
+      <div class="login-page"style="margin: auto; display: flex; align-items: center; justify-content: center;">
+          <div class="login-box" style=" margin-top: 2%; grid-row-gap: 10px; padding: 2%; max-width: 700px; width: 30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);">
+            <h3 class="heading" style="  margin-bottom: 10%; text-align: left;">Update vehicle details</h3>
+              <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Number</b></div>
+                    <div class="form-input">
+                      <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc;
+          box-sizing: border-box; background-color: white;"
+                        type="text"
+                        name="number"
+                        value="{{obj.number}}" required="required"
+                      />
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Type</b></div>
+                    <div class="form-input">
+                      <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc;
+          box-sizing: border-box; background-color: white;"
+                        type="number"
+                        name="type"
+                        value="{{obj.type}}" required="required"
+                      />
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Model</b></div>
+                    <div class="form-input">
+                        <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block;
+  border: 1px solid #ccc; box-sizing: border-box; background-color: white;" type="text" name="model" value="{{obj.model}}" required="required"/>
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Vehicle Description</b></div>
+                    <div class="form-input">
+                        <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block;
+    border: 1px solid #ccc; box-sizing: border-box; background-color: white;" type="text" name="description" value="{{obj.description}}" required="required"/>
+                    </div>
+                </div>
+                  <div class="grid-container" >
+   <div class="grid-item">
+                <button class="edit" type="submit" value="update" onMouseOver="opacity: 0.8;" >Save</button>
+   </div>
+      <div class="grid-item">
+          <button class="delete" onMouseOver="opacity: 0.8;" ><a href="/detail/{{obj.id}}" >Cancel</a></button>
+            </div>
+            </div>
+<!--                <button class="submit-button" style="background-color: #023B59;color: white;padding: 14px 20px;margin: 20px 0;-->
+<!--  border: 2px solid #023B59;cursor: pointer;width: 100%;border-radius: 10px;" type="submit" value="update" onMouseOver="opacity: 0.8;" >Update</button>-->
+              </form>
+<!--              <div>-->
+<!--                {% for message in messages %}-->
+<!--                    <h4>{{message}}</h4>-->
+<!--                {% endfor %}-->
+<!--              </div>-->
+            </div>
+        </div>
+{% else %}
+<div>Please Login!!</div>
+{% endif %}
+</body>
+</html>
+

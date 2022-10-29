@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+.active {
+  background-color: #04AA6D;
+}
+<!--for cards-->
+.card {
+
+  margin-top: 2%;
+  grid-row-gap: 10px;
+  padding: 2%;
+  max-width: 700px;
+    width: 30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.grid-container-in {
+  display: grid;
+  grid-template-columns: auto auto ;
+
+}
+.grid-container-out {
+  display: grid;
+  grid-template-columns: auto auto ;
+
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50% ;
+
+}
+.grid-item {
+margin: 2%;
+  text-align: center;
+}
+
+    .login-box{
+    margin-top: 2%;
+    grid-row-gap: 10px;
+    padding: 2%;
+    max-width: 700px;
+    width: 30%;
+    /* justify-content: center;
+    align-items: center; */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    /* top: 20%; */
+
+}
+.login-page{
+  /* padding: 10%; */
+  margin: auto;
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+.head{
+  text-align: center;
+}
+.form-row{
+  /* display: grid; */
+
+  width: 100%;
+  padding-bottom: 20px;
+  /* grid-template-rows: 1fr; */
+}
+
+.form-column{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.submit-button{
+  /* background-color: #76323F; */
+
+  background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: 2px solid #023B59;
+  cursor: pointer;
+
+  border-radius: 10px;
+
+
+}
+
+button:hover {
+  opacity: 0.8;
+
+}
+.delete{
+background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0;
+  border: 2px solid #023B59;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.edit{
+background-color: #023B59;
+  color: white;
+  padding: 14px 20px;
+  border: 2px solid #023B59;
+  margin: 20px 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.heading{
+  margin-bottom: 10%;
+  text-align: center;
+}
+.cancel{
+  background-color: yellow,
+}
+
+
+</style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+
+      <li><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}<li><a href="/add/">Register Vehicle</a></li>{% endif %}
+    </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+          <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% else %}
+          <li ><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li ><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+{% if user.is_authenticated %}
+<div class="login-page">
+        <div class="login-box" >
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><h3 class="heading" ><b>Are you sure you want to delete this item?</b></h3></div>
+                    <div class="form-input">vehicle number {{vehicles.number}}</div>
+                </div>
+                <button class="edit" type="submit"  onMouseOver="opacity: 0.8;" ><a href="/update/{{vehicles.id}}" >Yes</a></button>
+ </form>
+        </div>
+</div>
+{% else %}
+<div>Please Login!!</div>
+{% endif %}
+</body>
+</html>

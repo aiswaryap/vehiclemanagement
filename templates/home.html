@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.header-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.header-li {
+  float: left;
+}
+
+.header-li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.header-li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+<!--for cards-->
+.card {
+
+  margin-top: 2%;
+  grid-row-gap: 10px;
+  padding: 2%;
+  max-width: 700px;
+    width: 30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.grid-container{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+
+}
+.grid-container-out {
+  display: grid;
+  grid-template-columns: auto auto ;
+
+}
+.grid-item {
+
+  text-align: center;
+}
+.login-box{
+    margin: 2%;
+    grid-row-gap: 10px;
+    padding: 2%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.login-page{
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+button{
+background-color: #023B59;color: white;margin: 20px 0;
+  border: 2px solid #023B59;cursor: pointer;width: 80%;border-radius: 10px;
+  }
+</style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<ul class="header-ul">
+  <li class="header-li"><a class="active" href="/home">Home</a></li>
+  <li class="header-li"><a href="#news">News</a></li>
+  <li class="header-li"><a href="#contact">Contact</a></li>
+  <li class="header-li"><a href="#about">About</a></li>
+  {% if user.is_authenticated %}
+<!--    <h5>Hai {{user.username}}</h5>-->
+  <li class="header-li"><a href="/accounts/logout">Logout</a></li>
+  {% if user.is_superuser %}<li class="header-li"><a href="/add/">Register Vehicle</a></li>{% endif %}
+  <li class="header-li"><a href="update/">Update</a></li>
+    {% else %}
+  <li class="header-li"><a href="accounts/register">Register</a></li>
+  <li class="header-li"><a href="accounts/login">Login</a></li>
+  {% endif %}
+</ul>
+
+{% if user.is_authenticated %}
+<div>
+<h2>Registered vehicles</h2>
+<div class="grid-container" >
+    {% for result in vehicles %}
+   <div class="grid-item">
+        <div class="login-page">
+        <div class="login-box" >
+      <p>Vehicle Number : <a href="/detail/{{result.id}}"><b>{{result.number}}</b></a></p>
+    <p>Type : <b>{{result.type}}</b></p>
+    <p> Model : <b>{{result.model}}</b></p>
+
+<button><a href="/update/{{result.id}}" >View details</a></button>
+  </div>
+
+  </div>
+   </div>
+  {% endfor %}
+</div>
+</div>
+
+{% else %}
+<div>
+     <h4>Vehicle Management System<h4>
+<!--      <p style="width: 50%;">The VMS software helps you to manage vehicles, store all important data about vehicle type, fitness, routes, stations, driver-helper-officer details, vehicle base performance etc.</p>-->
+      <p>This is a vehicle management application where you can perform following activities</p>
+      <p> Register new vehicle, provide vehicle type, model, number and description </p>
+        <p> View already registered vehicle details </p>
+        <p> Update vehicle details </p>
+        <p> Delete already registered vehicle </p>
+
+      <br/>
+      <h4> This application is created using python django framework <h4>
+
+</div>
+
+{% endif %}
+
+</body>
+</html>

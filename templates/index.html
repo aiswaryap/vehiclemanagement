@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    .home {
+        border-radius: 5px;
+        background-color: #e9ecef;
+        padding: 10px;
+        text-align: center;
+    }
+    .active {
+      background-color: #04AA6D;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+    .grid-container{
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+    }
+    .grid-item {
+        text-align: center;
+    }
+    .card{
+        margin: 2%;
+        grid-row-gap: 10px;
+        padding: 2%;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+    .index-page{
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+    }
+    button{
+        background-color: #023B59;color: white;margin: 20px 0;
+        border: 2px solid #023B59;cursor: pointer;width: 80%;border-radius: 10px;
+    }
+    .jumbotron{
+        height: 80vh;
+        padding-top: 20vh;
+        padding-left: 10%
+     }
+</style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}
+            <li><a href="/add/">Register Vehicle</a></li>
+        {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+            <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% else %}
+            <li><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+{% if user.is_authenticated %}
+    <div class = "home">
+        <h2>Registered vehicles</h2>
+        <div class="grid-container" >
+            {% for result in vehicles %}
+           <div class="grid-item">
+               <div class="index-page">
+                   <div class="card" >
+                       <p>Vehicle Number : <b>{{result.number}}</b></p>
+                       <p>Type : <b>{{result.type}}</b></p>
+                       <p> Model : <b>{{result.model}}</b></p>
+                       <button><a href="/detail/{{result.id}}" >View details</a></button>
+                   </div>
+               </div>
+           </div>
+          {% endfor %}
+        </div>
+    </div>
+
+{% else %}
+
+<div class="jumbotron">
+  <h1>Vehicle Management System</h1>
+    <p>Vehicle management system is an automated software for the
+        transportation industry or an organization which owns a large number of vehicle</p>
+</div>
+
+
+{% endif %}
+
+</body>
+</html>

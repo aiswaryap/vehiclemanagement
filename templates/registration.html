@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="/">Home</a></li>
+
+      <li><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}<li><a href="/add/">Register Vehicle</a></li>{% endif %}
+    </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+          <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% else %}
+          <li class="active"><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li ><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+<h2 class="head" style="text-align: center;">Vehicle Management</h2>
+      <div class="login-page"style="margin: auto; display: flex; align-items: center; justify-content: center;">
+          <div class="login-box" style=" margin-top: 2%; grid-row-gap: 10px; padding: 2%; max-width: 700px; width: 30%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);">
+<!--            <h3 class="heading" style="  margin-bottom: 10%; text-align: left;">Sign Up</h3>-->
+              <form action="register" method="post">
+                  {% csrf_token %}
+                  <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Username</b></div>
+                    <div class="form-input">
+                      <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc;
+          box-sizing: border-box; background-color: white;"
+                        type="text"
+                        name="username"
+                        placeholder="Your name" required="required"
+                      />
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Email</b></div>
+                    <div class="form-input">
+                      <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc;
+          box-sizing: border-box; background-color: white;"
+                        type="email"
+                        name="email"
+                        placeholder="Your email" required="required"
+                      />
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Password</b></div>
+                    <div class="form-input">
+                        <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block;
+  border: 1px solid #ccc; box-sizing: border-box; background-color: white;" type="password" name="password1" placeholder="Your password" required="required"/>
+                    </div>
+                </div>
+                <div class="form-row" style="width: 100%;">
+                    <div class="form-label"><b>Password</b></div>
+                    <div class="form-input">
+                        <input style="width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block;
+    border: 1px solid #ccc; box-sizing: border-box; background-color: white;" type="password" name="password2" placeholder="Comfirm password" required="required"/>
+                    </div>
+                </div>
+
+                <button class="submit-button" style="background-color: #023B59;color: white;padding: 14px 20px;margin: 20px 0;
+  border: 2px solid #023B59;cursor: pointer;width: 100%;border-radius: 10px;" type="submit" onMouseOver="opacity: 0.8;" >Sign Up Now</button>
+              </form>
+              <div>
+                {% for message in messages %}
+                    <h4>{{message}}</h4>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+
+
+
+
+<!--<h2>Register here!</h2>-->
+<!--<form action="register" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <input type="text" name="username" class="form-control p-4" placeholder="Your name" required="required" />-->
+<!--  <input type="email" name="email" class="form-control p-4" placeholder="Your email" required="required" />-->
+<!--  <input type="password" name="password1" class="form-control p-4" placeholder="Your password" required="required" />-->
+<!--  <input type="password" name="password2" class="form-control p-4" placeholder="Confirm password" required="required" />-->
+<!--  <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>-->
+<!--</form>-->
+<!--<div>-->
+<!--    {% for message in messages %}-->
+<!--        <h4>{{message}}</h4>-->
+<!--    {% endfor %}-->
+<!--</div>-->
+
+
+
+</body>
+</html>
+

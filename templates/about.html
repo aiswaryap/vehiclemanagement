@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+ .jumbotron{
+ padding-left: 2%;
+ text-align: center;
+ }
+</style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">VehicleManagementSystem</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="/">Home</a></li>
+
+      <li class="active"><a href="/about">About</a></li>
+        <li><a href="/source">Source</a></li>
+        {% if user.is_superuser %}<li><a href="/add/">Register Vehicle</a></li>{% endif %}
+    </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+          <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          {% else %}
+          <li><a href="/accounts/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+    </ul>
+
+  </div>
+</nav>
+
+
+<div class="jumbotron">
+  <h1>About</h1>
+  <br/>
+
+    <p>Vehicle Management system is a system to manage vehicle, store all important data of your vehicle</p>
+  <p>There are tree types of users</p>
+
+    <p><b>SuperAdmin:</b> Can create vehicle registration, and perform edit delete operations</p>
+    <p><b>Admin:</b> Can view and edit already registered vehicles</p>
+    <p><b>User:</b> Can view all the registered vehicles</p>
+<!--  <p>This is a vehicle management application where you can perform following activities</p>-->
+<!--      <p> Register new vehicle, provide vehicle type, model, number and description </p>-->
+<!--        <p> View already registered vehicle details </p>-->
+<!--        <p> Update vehicle details </p>-->
+<!--        <p> Delete already registered vehicle </p>-->
+</div>
+
+
+</body>
+</html>
