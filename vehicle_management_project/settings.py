@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'vehicle_management_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database1',
-        'USER':'postgres',
-        'PASSWORD':'1234',
-        'HOST':'localhost'
+        'NAME': 'da3b680uip3ai7',
+        'USER':'fuoyeqrwrlsmhz',
+        'PASSWORD':'aa6c981bb1405b9d239a64d517bc615cdedf8a91c2eb80e329f0b1d583d62510',
+        'HOST':'ec2-3-220-207-90.compute-1.amazonaws.com'
     }
 }
 
